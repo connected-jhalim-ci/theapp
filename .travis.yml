@@ -30,7 +30,7 @@ install:
   - echo y | sdkmanager "extras;android;m2repository" >/dev/null
 
 script:
-  - ./gradlew clean app:lint app:assembleDebug app:assembleDebugUnitTest
+  - ./gradlew clean app:lint jacocoTestDebugUnitTestReport
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
