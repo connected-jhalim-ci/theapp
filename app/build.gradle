@@ -3,6 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-allopen'
+apply plugin: 'jacoco-android'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.4'
+    }
+}
 
 android {
     compileSdkVersion 29
@@ -37,7 +48,22 @@ android {
 allOpen {
     annotation "com.connected.theapp.AllOpen"
 }
+jacoco {
+    toolVersion = "0.8.4"
+    jacocoAndroidUnitTestReport {
+        excludes += [
+                     '**/DataBinderMapper*.*',
+                     '**/DataBindingInfo.*',
+                     'androidx.databinding/**',
+                     '**/generated/callback/**',
+                     '**/databinding/**',
+                    ]
+    }
+}
 
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
