@@ -3,6 +3,7 @@ package com.connected.theapp
 import android.content.res.Resources
 import android.content.res.Resources.NotFoundException
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import org.hamcrest.Description
@@ -11,7 +12,7 @@ import org.hamcrest.TypeSafeMatcher
 
 
 @Suppress("unused")
-class RecyclerViewMatcher(private val recyclerViewId: Int) {
+class RecyclerViewMatcher(@IdRes private val recyclerViewId: Int) {
 
     fun atPosition(position: Int): Matcher<View> {
         return atPositionOnView(position, -1)
@@ -19,7 +20,7 @@ class RecyclerViewMatcher(private val recyclerViewId: Int) {
 
     fun atPositionOnView(
         position: Int,
-        targetViewId: Int
+        @IdRes targetViewId: Int
     ): Matcher<View> {
         return object : TypeSafeMatcher<View>() {
 

@@ -23,7 +23,7 @@ class MainActivityTest : KoinTest {
     @get:Rule
     val uiRule = ActivityTestRule(MainActivity::class.java, false, false)
 
-    private val testSearchResult: MutableLiveData<List<User>> = MutableLiveData()
+    private val testSearchResult: MutableLiveData<List<SearchData>> = MutableLiveData()
     private val mockViewModel: MainViewModel by uiRule.viewModel()
 
     @Before
@@ -49,16 +49,16 @@ class MainActivityTest : KoinTest {
     @Test
     fun `display search result`() {
         val results = listOf(
-            User("connected", "https://avatars2.githubusercontent.com/u/1562674?v=4"),
-            User("aep", "https://avatars3.githubusercontent.com/u/136926?v=4"),
-            User("connectedCat", "https://avatars1.githubusercontent.com/u/1493312?v=4")
+            SearchData("connected", "https://avatars2.githubusercontent.com/u/1562674?v=4"),
+            SearchData("aep", "https://avatars3.githubusercontent.com/u/136926?v=4"),
+            SearchData("connectedCat", "https://avatars1.githubusercontent.com/u/1493312?v=4")
         )
 
         testSearchResult.value = results
 
         for (i in 0..2) {
-            searchResultAvatar(i).check(matches(withContentDescription(results[i].avatarUrl)))
-            searchResultLogin(i).check(matches(withText(results[i].login)))
+            searchResultAvatar(i).check(matches(withContentDescription(results[i].imageUrl)))
+            searchResultLogin(i).check(matches(withText(results[i].title)))
         }
 
 

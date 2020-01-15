@@ -23,7 +23,8 @@ class App : Application() {
 
     companion object {
         private val appModule = module {
-            viewModel { MainViewModel() }
+            viewModel { MainViewModel(get()) }
+            factory { GithubRepositoryImpl() }
         }
     }
 
