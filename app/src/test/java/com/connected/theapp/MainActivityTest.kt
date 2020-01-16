@@ -13,6 +13,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.test.KoinTest
+import org.koin.test.mock.MockProviderRule
 import org.koin.test.mock.declareMock
 import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
@@ -22,6 +23,11 @@ class MainActivityTest : KoinTest {
 
     @get:Rule
     val uiRule = ActivityTestRule(MainActivity::class.java, false, false)
+
+    @get:Rule
+    val mockProvider = MockProviderRule.create { clazz ->
+        Mockito.mock(clazz.java)
+    }
 
     private val testSearchResult: MutableLiveData<List<SearchData>> = MutableLiveData()
     private val mockViewModel: MainViewModel by uiRule.viewModel()

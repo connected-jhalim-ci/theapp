@@ -1,14 +1,25 @@
 package com.connected.theapp
 
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.KoinTest
+import org.koin.test.get
+import org.koin.test.mock.MockProviderRule
+import org.koin.test.mock.declareMock
+import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class MainViewModelTest {
+class MainViewModelTest : KoinTest {
+
+    @get:Rule
+    val mockProvider = MockProviderRule.create { clazz ->
+        Mockito.mock(clazz.java)
+    }
 
     @Test
     fun `search() should update search result value by combining repository searchUser() and searchRepositories() result`() {
@@ -62,11 +73,13 @@ class MainViewModelTest {
 
         )
         val text = "Hello"
-        val repository = mock<GithubRepository> {
-            on { searchUser(text) } doReturn githubUsers
-            on { searchRepositories(text) } doReturn githubRepos
+        declareMock<GithubRepository> {
+            runBlocking {
+                whenever(searchUsers(text)).thenReturn(githubUsers)
+                whenever(searchRepositories(text)).thenReturn(githubRepos)
+            }
         }
-        val viewModel = MainViewModel(repository)
+        val viewModel = get<MainViewModel>()
 
         viewModel.search(text)
 
