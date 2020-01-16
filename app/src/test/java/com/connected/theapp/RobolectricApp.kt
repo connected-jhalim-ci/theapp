@@ -1,10 +1,12 @@
 package com.connected.theapp
 
+import org.koin.core.context.stopKoin
+
 class RobolectricApp : App() {
 
-    override fun onCreate() {
-        if (!isCalled) super.onCreate()
-        isCalled = true
+    override fun setupKoin() {
+        stopKoin()
+        super.setupKoin()
     }
 
     companion object {

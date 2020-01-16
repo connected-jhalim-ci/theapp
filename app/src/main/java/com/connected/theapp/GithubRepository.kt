@@ -1,30 +1,25 @@
 package com.connected.theapp
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
 interface GithubRepository {
-
-    fun searchUser(keyword: String): List<GithubUser>
-    fun searchRepositories(keyword: String): List<GithubRepo>
-
+    suspend fun searchUsers(keyword: String): List<GithubUser>
+    suspend fun searchRepositories(keyword: String): List<GithubRepo>
 }
 
-class GithubRepositoryImpl : GithubRepository {
+class GithubRepositoryImpl(val service: GithubService) : GithubRepository {
 
-    override fun searchUser(keyword: String): List<GithubUser> {
-        return emptyList()
+    override suspend fun searchUsers(keyword: String): List<GithubUser> {
+        return withContext(Dispatchers.IO) {
+            service.searchUsers(keyword).users
+        }
     }
 
-    override fun searchRepositories(keyword: String): List<GithubRepo> {
-        return emptyList()
+    override suspend fun searchRepositories(keyword: String): List<GithubRepo> {
+        return withContext(Dispatchers.IO) {
+            service.searchRepositories(keyword).repos
+        }
     }
 
 }
-
-data class GithubUser(
-    val login: String,
-    val avatarUrl: String
-)
-
-data class GithubRepo(
-    val name: String,
-    val owner: GithubUser
-)
