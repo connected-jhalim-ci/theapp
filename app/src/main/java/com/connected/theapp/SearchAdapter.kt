@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.connected.theapp.databinding.ItemUserBinding
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.VH>() {
@@ -27,6 +28,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.VH>() {
         with(holder.binding) {
             login.text = data[position].title
             avatar.contentDescription = data[position].imageUrl
+            Glide.with(avatar.context)
+                .load(data[position].imageUrl)
+                .into(avatar)
         }
     }
 

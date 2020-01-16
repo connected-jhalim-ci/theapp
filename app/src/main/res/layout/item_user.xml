@@ -13,6 +13,7 @@
             android:id="@+id/avatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_margin="10dp"
             android:contentDescription="@string/avatar"
             android:scaleType="fitCenter"
             tools:src="@drawable/ic_launcher_foreground" />
@@ -23,7 +24,5 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             tools:text="Login name" />
-
-
     </LinearLayout>
 </layout>
