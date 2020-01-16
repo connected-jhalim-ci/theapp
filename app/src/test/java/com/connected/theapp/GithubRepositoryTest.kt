@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 
 @RunWith(RobolectricTestRunner::class)
-class GithubRepositoryImplTest : KoinTest {
+class GithubRepositoryTest : KoinTest {
 
     private val server = MockWebServer()
 
