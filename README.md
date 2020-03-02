@@ -1,6 +1,6 @@
 # THE APP
-![build](https://img.shields.io/travis/connected-jhalim-ci/theapp)
-![coverage](https://img.shields.io/codecov/c/github/connected-jhalim-ci/theapp)
+[![build](https://img.shields.io/travis/connected-jhalim-ci/theapp)](https://travis-ci.org/connected-jhalim-ci/theapp)
+[![coverage](https://img.shields.io/codecov/c/github/connected-jhalim-ci/theapp)](https://codecov.io/gh/connected-jhalim-ci/theapp/)
 
 ## Coverage
 https://codecov.io/gh/connected-jhalim-ci/theapp/
